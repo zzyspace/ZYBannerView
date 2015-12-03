@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="H7e-Cz-3Fw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="H7e-Cz-3Fw">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -35,23 +35,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Vv-Xi-fSx" customClass="ZYBannerView">
-                                <rect key="frame" x="0.0" y="367" width="375" height="300"/>
+                                <rect key="frame" x="0.0" y="523" width="375" height="144"/>
                                 <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="p4i-pl-Btv"/>
+                                    <constraint firstAttribute="height" constant="144" id="p4i-pl-Btv"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="disableAutoScroll" value="NO"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="shouldLoop" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showFooter" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="autoScrollInterval">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gfr-sV-2Ts">
-                                <rect key="frame" x="87" y="246" width="185" height="113"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="pXa-EX-fLo" id="u04-D9-A25"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,17 +54,11 @@
                             <constraint firstItem="1Vv-Xi-fSx" firstAttribute="leading" secondItem="9GW-9j-Nl9" secondAttribute="leading" id="XP1-fM-eGd"/>
                             <constraint firstAttribute="trailing" secondItem="1Vv-Xi-fSx" secondAttribute="trailing" id="eE0-mt-N4C"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="Gfr-sV-2Ts"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="banner" id="clc-aH-f7l"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="storyboardBanner" destination="1Vv-Xi-fSx" id="qnA-un-5J3"/>
-                        <outlet property="vview" destination="Gfr-sV-2Ts" id="loa-en-FJ1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J91-Jc-4Ld" userLabel="First Responder" sceneMemberID="firstResponder"/>

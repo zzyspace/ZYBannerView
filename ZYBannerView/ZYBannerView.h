@@ -27,8 +27,8 @@
 /** pageControl */
 @property (nonatomic, strong) UIPageControl *pageControl;
 
-@property (nonatomic, weak) id<ZYBannerViewDataSource> dataSource;
-@property (nonatomic, weak) id<ZYBannerViewDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id<ZYBannerViewDataSource> dataSource;
+@property (nonatomic, weak) IBOutlet id<ZYBannerViewDelegate> delegate;
 
 - (void)reloadData;
 

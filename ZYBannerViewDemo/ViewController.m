@@ -19,8 +19,6 @@
 
 @property (nonatomic, strong) ZYBannerView *banner;
 @property (weak, nonatomic) IBOutlet ZYBannerView *storyboardBanner;
-@property (weak, nonatomic) IBOutlet UIView *vview;
-@property (nonatomic, strong) UIPageControl *pa;
 
 @end
 
@@ -28,27 +26,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.automaticallyAdjustsScrollViewInsets = NO;
-//    [self.view addSubview:self.banner];
     
-    self.storyboardBanner.delegate = self;
-    self.storyboardBanner.dataSource = self;
-//    self.storyboardBanner.disableAutoScroll = YES;
-//    self.storyboardBanner.autoScrollInterval = 2;
-//    self.storyboardBanner.showFooter = YES;
-//    self.storyboardBanner.shouldLoop = YES;
-    
-    self.storyboardBanner.pageControl.frame = CGRectMake(0, 0, 100, 100);//self.storyboardBanner.bounds;
+    [self.view addSubview:self.banner];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    self.banner.frame = CGRectMake(0,
-//                                   kNavigationBarHeight,
-//                                   300,
-//                                   kBannerHeight);
+    
+    self.banner.frame = CGRectMake(0,
+                                   kNavigationBarHeight,
+                                   kScreenWidth,
+                                   kBannerHeight);
 }
 
 - (void)viewDidLayoutSubviews
@@ -80,28 +70,26 @@
 
 - (void)banner:(ZYBannerView *)banner didSelectItemAtIndex:(NSInteger)index
 {
-
+    NSLog(@"点击了%ld行", index);
 }
 
 - (void)bannerFooterDidTrigger:(ZYBannerView *)banner
 {
-
+    NSLog(@"拖动了Footer");
 }
 
-//- (ZYBannerView *)banner
-//{
-//    if (!_banner) {
-//        _banner = [[ZYBannerView alloc] init];
-////        _banner.showFooter = YES;
-////        _banner.disableAutoScroll = YES;
-//        _banner.pageControl = [[UIPageControl alloc] init];
-//        _banner.pageControl.frame = CGRectMake(0, 0, 100, 100);
-//        _banner.dataSource = self;
-//        _banner.delegate = self;
-//        _banner.autoScrollInterval = 2;
-//        _banner.shouldLoop = YES;
-//    }
-//    return _banner;
-//}
+#pragma mark - getter
+
+- (ZYBannerView *)banner
+{
+    if (!_banner) {
+        _banner = [[ZYBannerView alloc] init];
+        _banner.showFooter = YES;
+        _banner.disableAutoScroll = YES;
+        _banner.dataSource = self;
+        _banner.delegate = self;
+    }
+    return _banner;
+}
 
 @end
