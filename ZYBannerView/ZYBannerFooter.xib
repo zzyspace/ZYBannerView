@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="banner_footer" id="U6b-Vx-4bR" customClass="ZYBannerFooter">
+            <rect key="frame" x="0.0" y="0.0" width="83" height="266"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="拖动查看图文详情" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gyg-DA-Y7u">
+                    <rect key="frame" x="42" y="0.0" width="14" height="266"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="14" id="bl9-nw-LJ7"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                    <color key="shadowColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0pi-EN-2nJ">
+                    <rect key="frame" x="23" y="125" width="15" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="SpW-f6-Nu9"/>
+                        <constraint firstAttribute="width" constant="15" id="w7D-MA-RSn"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Gyg-DA-Y7u" firstAttribute="leading" secondItem="0pi-EN-2nJ" secondAttribute="trailing" constant="4" id="GW8-EX-QRG"/>
+                <constraint firstAttribute="centerY" secondItem="0pi-EN-2nJ" secondAttribute="centerY" id="Lni-8d-HRn"/>
+                <constraint firstAttribute="bottom" secondItem="Gyg-DA-Y7u" secondAttribute="bottom" id="Y4C-1W-rgP"/>
+                <constraint firstItem="Gyg-DA-Y7u" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="YbF-y7-BS5"/>
+                <constraint firstAttribute="centerX" secondItem="Gyg-DA-Y7u" secondAttribute="centerX" constant="-7" id="YqN-hr-RTD"/>
+            </constraints>
+            <connections>
+                <outlet property="arrowView" destination="0pi-EN-2nJ" id="dvP-du-S2U"/>
+                <outlet property="label" destination="Gyg-DA-Y7u" id="EdF-4Q-p3q"/>
+            </connections>
+            <point key="canvasLocation" x="185.5" y="357"/>
+        </collectionReusableView>
+    </objects>
+</document>

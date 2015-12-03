@@ -1,0 +1,54 @@
+//
+//  ZYBannerView.h
+//  DuoBao
+//
+//  Created by 张志延 on 15/10/17.
+//  Copyright (c) 2015年 tongbu. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@protocol ZYBannerViewDataSource, ZYBannerViewDelegate;
+
+@interface ZYBannerView : UIView
+
+/** 是否需要循环滚动, 默认为 NO */
+@property (nonatomic, assign) IBInspectable BOOL shouldLoop;
+
+/** 是否显示footer, 默认为 NO (此属性为YES时, shouldLoop会被置为NO) */
+@property (nonatomic, assign) IBInspectable BOOL showFooter;
+
+/** 是否禁用自动滑动, 默认为 NO */
+@property (nonatomic, assign) IBInspectable BOOL disableAutoScroll;
+
+/** 自动滑动间隔时间(s), 默认为 3.0 */
+@property (nonatomic, assign) IBInspectable CGFloat autoScrollInterval;
+
+/** pageControl */
+@property (nonatomic, strong) UIPageControl *pageControl;
+
+@property (nonatomic, weak) id<ZYBannerViewDataSource> dataSource;
+@property (nonatomic, weak) id<ZYBannerViewDelegate> delegate;
+
+- (void)reloadData;
+
+- (void)startTimer;
+- (void)stopTimer;
+
+@end
+
+@protocol ZYBannerViewDataSource <NSObject>
+@required
+
+- (NSInteger)numberOfItemsInBanner:(ZYBannerView *)banner;
+- (UIView *)banner:(ZYBannerView *)banner viewForItemAtIndex:(NSInteger)index;
+
+@end
+
+@protocol ZYBannerViewDelegate <NSObject>
+@optional
+
+- (void)banner:(ZYBannerView *)banner didSelectItemAtIndex:(NSInteger)index;
+- (void)bannerFooterDidTrigger:(ZYBannerView *)banner;
+
+@end
