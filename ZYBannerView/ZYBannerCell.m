@@ -10,8 +10,4 @@
 
 @implementation ZYBannerCell
 
-- (void)awakeFromNib {
-    // Initialization code
-}
-
 @end

@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, ZYBannerFooterState) {
+    ZYBannerFooterStateIdle = 0,
+    ZYBannerFooterStateTrigger,
+};
+
 @interface ZYBannerFooter : UICollectionReusableView
 
-@property (weak, nonatomic) IBOutlet UILabel *label;
-@property (weak, nonatomic) IBOutlet UIImageView *arrowView;
+@property (nonatomic, strong) UILabel *label;
+@property (nonatomic, strong) UIImageView *arrowView;
 
 @end

@@ -8,13 +8,12 @@
 
 #import "ZYBannerView.h"
 #import "ZYBannerCell.h"
-#import "ZYBannerFooter.h"
 
 // 总共的item数
-#define kTotalItem (self.itemCount * 20000)
+#define ZY_TOTAL_ITEMS (self.itemCount * 20000)
 
-#define kFooterWidth 64.0
-#define kPageControlHeight 32.0
+#define ZY_FOOTER_WIDTH 64.0
+#define ZY_PAGE_CONTROL_HEIGHT 32.0
 
 @interface ZYBannerView () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -70,14 +69,14 @@ static NSString *banner_footer = @"banner_footer";
 {
     // collectionView
     self.flowLayout.itemSize = self.bounds.size;
-    self.flowLayout.footerReferenceSize = CGSizeMake(kFooterWidth, self.frame.size.height);
+    self.flowLayout.footerReferenceSize = CGSizeMake(ZY_FOOTER_WIDTH, self.frame.size.height);
     self.collectionView.frame = self.bounds;
     
     // pageControl
     if (CGRectEqualToRect(self.pageControl.frame, CGRectZero)) {
         // 若未对pageControl设置过frame, 则使用以下默认frame
         CGFloat w = self.frame.size.width;
-        CGFloat h = kPageControlHeight;
+        CGFloat h = ZY_PAGE_CONTROL_HEIGHT;
         CGFloat x = 0;
         CGFloat y = self.frame.size.height - h;
         self.pageControl.frame = CGRectMake(x, y, w, h);
@@ -112,7 +111,7 @@ static NSString *banner_footer = @"banner_footer";
     if (self.shouldLoop) {
         // 总item数的中间
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:(kTotalItem / 2) inSection:0]
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:(ZY_TOTAL_ITEMS / 2) inSection:0]
                                         atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
             self.pageControl.currentPage = 0;
         });
@@ -161,7 +160,7 @@ static NSString *banner_footer = @"banner_footer";
     NSUInteger currentItem = currentIndexPath.item;
     NSUInteger nextItem = currentItem + 1;
     
-    if(nextItem >= kTotalItem) {
+    if(nextItem >= ZY_TOTAL_ITEMS) {
         return;
     }
     
@@ -192,7 +191,7 @@ static NSString *banner_footer = @"banner_footer";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (self.shouldLoop) {
-        return kTotalItem;
+        return ZY_TOTAL_ITEMS;
     } else {
         return self.itemCount;
     }
@@ -268,7 +267,7 @@ static NSString *banner_footer = @"banner_footer";
     if (footerDisplayOffset > 0)
     {
         // 开始出现footer
-        if (footerDisplayOffset > kFooterWidth) {
+        if (footerDisplayOffset > ZY_FOOTER_WIDTH) {
             if (lastOffset > 0) return;
             self.footer.label.text = @"释放查看图文详情";
             [UIView animateWithDuration:0.3 animations:^{
@@ -281,7 +280,7 @@ static NSString *banner_footer = @"banner_footer";
                 self.footer.arrowView.transform = CGAffineTransformMakeRotation(0);
             }];
         }
-        lastOffset = footerDisplayOffset - kFooterWidth;
+        lastOffset = footerDisplayOffset - ZY_FOOTER_WIDTH;
     }
 }
 
@@ -292,7 +291,7 @@ static NSString *banner_footer = @"banner_footer";
     CGFloat footerDisplayOffset = (scrollView.contentOffset.x - (self.frame.size.width * (self.itemCount - 1)));
     
     // 通知footer代理
-    if (footerDisplayOffset > kFooterWidth) {
+    if (footerDisplayOffset > ZY_FOOTER_WIDTH) {
         if ([self.delegate respondsToSelector:@selector(bannerFooterDidTrigger:)]) {
             [self.delegate bannerFooterDidTrigger:self];
         }
@@ -398,11 +397,13 @@ static NSString *banner_footer = @"banner_footer";
         _collectionView.dataSource = self;
         
         // 注册cell
-        [_collectionView registerNib:[UINib nibWithNibName:@"ZYBannerCell" bundle:nil] forCellWithReuseIdentifier:banner_item];
+//        [_collectionView registerNib:[UINib nibWithNibName:@"ZYBannerCell" bundle:nil] forCellWithReuseIdentifier:banner_item];
+        [_collectionView registerClass:[ZYBannerCell class] forCellWithReuseIdentifier:banner_item];
         
         // 注册 \ 配置footer
-        [_collectionView registerNib:[UINib nibWithNibName:@"ZYBannerFooter" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:banner_footer];
-        _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, -kFooterWidth);
+//        [_collectionView registerNib:[UINib nibWithNibName:@"ZYBannerFooter" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:banner_footer];
+        [_collectionView registerClass:[ZYBannerFooter class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:banner_footer];
+        _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, -ZY_FOOTER_WIDTH);
     }
     return _collectionView;
 }

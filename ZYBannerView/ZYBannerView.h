@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZYBannerFooter.h"
 
 @protocol ZYBannerViewDataSource, ZYBannerViewDelegate;
 
@@ -42,6 +43,10 @@
 
 - (NSInteger)numberOfItemsInBanner:(ZYBannerView *)banner;
 - (UIView *)banner:(ZYBannerView *)banner viewForItemAtIndex:(NSInteger)index;
+
+@optional
+
+- (NSString *)banner:(ZYBannerView *)banner titleForFooterWithState:(ZYBannerFooterState)footerState;
 
 @end
 
