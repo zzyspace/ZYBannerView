@@ -74,13 +74,13 @@
 		5AA8FB441C0BDAEE0074F33C /* ZYBannerView */ = {
 			isa = PBXGroup;
 			children = (
+				5AA8FB4C1C0BDAEE0074F33C /* ZYBannerView.h */,
+				5AA8FB4D1C0BDAEE0074F33C /* ZYBannerView.m */,
+				5AA8FB4B1C0BDAEE0074F33C /* ZYBannerView.bundle */,
 				5AA8FB451C0BDAEE0074F33C /* ZYBannerCell.h */,
 				5AA8FB461C0BDAEE0074F33C /* ZYBannerCell.m */,
 				5AA8FB481C0BDAEE0074F33C /* ZYBannerFooter.h */,
 				5AA8FB491C0BDAEE0074F33C /* ZYBannerFooter.m */,
-				5AA8FB4B1C0BDAEE0074F33C /* ZYBannerView.bundle */,
-				5AA8FB4C1C0BDAEE0074F33C /* ZYBannerView.h */,
-				5AA8FB4D1C0BDAEE0074F33C /* ZYBannerView.m */,
 			);
 			path = ZYBannerView;
 			sourceTree = "<group>";

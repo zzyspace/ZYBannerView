@@ -66,6 +66,16 @@
     return imageView;
 }
 
+- (NSString *)banner:(ZYBannerView *)banner titleForFooterWithState:(ZYBannerFooterState)footerState
+{
+    if (footerState == ZYBannerFooterStateIdle) {
+        return @"开始拖动";
+    } else if (footerState == ZYBannerFooterStateTrigger) {
+        return @"触发动作";
+    }
+    return nil;
+}
+
 #pragma mark - ZYBannerViewDelegate
 
 - (void)banner:(ZYBannerView *)banner didSelectItemAtIndex:(NSInteger)index

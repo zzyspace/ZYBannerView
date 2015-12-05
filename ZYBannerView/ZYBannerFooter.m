@@ -16,11 +16,18 @@
 
 @implementation ZYBannerFooter
 
+@synthesize idleTitle = _idleTitle;
+@synthesize triggerTitle = _triggerTitle;
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
+        
         [self addSubview:self.arrowView];
         [self addSubview:self.label];
+        
+        self.arrowView.image = [UIImage imageNamed:@"ZYBannerView.bundle/banner_arrow.png"];
+        self.state = ZYBannerFooterStateIdle;
     }
     return self;
 }
@@ -40,12 +47,37 @@
     CGFloat labelW = ZY_ARROW_SIDE;
     CGFloat labelH = self.bounds.size.height;
     self.label.frame = CGRectMake(labelX, labelY, labelW, labelH);
-    
-    self.arrowView.image = [UIImage imageNamed:@"ZYBannerView.bundle/banner_arrow.png"];
-    self.label.text = @"拖动查看图文详情";
 }
 
 #pragma mark - setters & getters 
+
+- (void)setState:(ZYBannerFooterState)state
+{
+    _state = state;
+    
+    switch (state) {
+        case ZYBannerFooterStateIdle:
+        {
+            self.label.text = self.idleTitle;
+            [UIView animateWithDuration:0.3 animations:^{
+                self.arrowView.transform = CGAffineTransformMakeRotation(0);
+            }];
+
+        }
+            break;
+        case ZYBannerFooterStateTrigger:
+        {
+            self.label.text = self.triggerTitle;
+            [UIView animateWithDuration:0.3 animations:^{
+                self.arrowView.transform = CGAffineTransformMakeRotation(M_PI);
+            }];
+        }
+            break;
+
+        default:
+            break;
+    }
+}
 
 - (UIImageView *)arrowView
 {
@@ -64,6 +96,40 @@
         _label.numberOfLines = 0;
     }
     return _label;
+}
+
+- (void)setIdleTitle:(NSString *)idleTitle
+{
+    _idleTitle = idleTitle;
+    
+    if (self.state == ZYBannerFooterStateIdle) {
+        self.label.text = idleTitle;
+    }
+}
+
+- (NSString *)idleTitle
+{
+    if (!_idleTitle) {
+        _idleTitle = @"拖动查看详情"; // default
+    }
+    return _idleTitle;
+}
+
+- (void)setTriggerTitle:(NSString *)triggerTitle
+{
+    _triggerTitle = triggerTitle;
+    
+    if (self.state == ZYBannerFooterStateTrigger) {
+        self.label.text = triggerTitle;
+    }
+}
+
+- (NSString *)triggerTitle
+{
+    if (!_triggerTitle) {
+        _triggerTitle = @"释放查看详情"; // default
+    }
+    return _triggerTitle;
 }
 
 @end
