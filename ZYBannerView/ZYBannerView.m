@@ -383,14 +383,14 @@ static NSString *banner_footer = @"banner_footer";
 /**
  *  自动滑动间隔时间
  */
-- (void)setScrollInterval:(CGFloat)scrollInterval
+- (void)setScrollInterval:(NSTimeInterval)scrollInterval
 {
     _scrollInterval = scrollInterval;
     
     [self startTimer];
 }
 
-- (CGFloat)scrollInterval
+- (NSTimeInterval)scrollInterval
 {
     if (!_scrollInterval) {
         _scrollInterval = 3.0; // default

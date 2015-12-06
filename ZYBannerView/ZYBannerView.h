@@ -23,7 +23,7 @@
 @property (nonatomic, assign) IBInspectable BOOL autoScroll;
 
 /** 自动滑动间隔时间(s), 默认为 3.0 */
-@property (nonatomic, assign) IBInspectable CGFloat scrollInterval;
+@property (nonatomic, assign) IBInspectable NSTimeInterval scrollInterval;
 
 /** pageControl, 可自由配置其属性 */
 @property (nonatomic, strong, readonly) UIPageControl *pageControl;
