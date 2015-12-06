@@ -129,7 +129,7 @@ Banner上显示的PageControl, 可自由配置其属性, 例如`frame`, `pageInd
 ## Installation
 
 - 将ZYBannerView文件夹中拖拽到项目中
-- 导入头文件：#import "ZYBannerView.h"
+- 导入头文件：`#import "ZYBannerView.h"`
 
 ## License
 
