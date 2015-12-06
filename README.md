@@ -1,5 +1,6 @@
 # ZYBannerView
-简单易用, 可定制性强的轮播控件
+### 简单易用, 可定制性强的轮播控件
+---
 
 ## Features
 
@@ -8,16 +9,6 @@
 - [x] 显示\隐藏Footer
 - [x] 自定义pageControl属性
 - [x] 支持在Storyboard中创建并配置属性
-
-## Requirements
-
-- iOS 7.0+
-- Xcode 5.0+
-
-## Installation
-
-- 将ZYBannerView文件夹中拖拽到项目中
-- 导入头文件：#import "ZYBannerView.h"
 
 ## Usage
 
@@ -48,6 +39,16 @@ self.banner.dataSource = self;
     return imageView;
 }
 ```
+
+## Requirements
+
+- iOS 7.0+
+- Xcode 5.0+
+
+## Installation
+
+- 将ZYBannerView文件夹中拖拽到项目中
+- 导入头文件：#import "ZYBannerView.h"
 
 ## License
 
