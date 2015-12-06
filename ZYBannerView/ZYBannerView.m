@@ -21,6 +21,7 @@
 @property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 
 @property (nonatomic, strong) ZYBannerFooter *footer;
+@property (nonatomic, strong, readwrite) UIPageControl *pageControl;
 
 @property (nonatomic, assign) NSInteger itemCount;
 @property (nonatomic, strong) NSTimer *timer;
@@ -29,9 +30,10 @@
 
 @implementation ZYBannerView
 
-@synthesize autoScrollInterval = _autoScrollInterval;
-@synthesize pageControl = _pageControl;
+@synthesize scrollInterval = _scrollInterval;
+@synthesize autoScroll = _autoScroll;
 @synthesize shouldLoop =_shouldLoop;
+@synthesize pageControl = _pageControl;
 
 static NSString *banner_item = @"banner_item";
 static NSString *banner_footer = @"banner_footer";
@@ -83,31 +85,9 @@ static NSString *banner_footer = @"banner_footer";
     }
 }
 
-#pragma mark - Reload
-
-- (void)reloadData
+// 配置默认起始位置
+- (void)fixDefaultPosition
 {
-    if (!self.dataSource) {
-        return;
-    }
-    if (self.itemCount == 0) {
-        self.pageControl.hidden = YES;
-        self.disableAutoScroll = YES;
-        return;
-    }
-    if (self.itemCount == 1) {
-        self.pageControl.hidden = YES;
-        self.disableAutoScroll = YES;
-        self.shouldLoop = NO;
-    }
-    
-    // 设置pageControl总页数
-    self.pageControl.numberOfPages = self.itemCount;
-    
-    // 刷新数据
-    [self.collectionView reloadData];
-    
-    // 默认起始位置
     if (self.shouldLoop) {
         // 总item数的中间
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -123,6 +103,31 @@ static NSString *banner_footer = @"banner_footer";
             self.pageControl.currentPage = 0;
         });
     }
+}
+
+#pragma mark - Reload
+
+- (void)reloadData
+{
+    if (!self.dataSource) {
+        return;
+    }
+    if (self.itemCount == 0) {
+        self.pageControl.hidden = YES;
+        self.autoScroll = NO;
+        return;
+    }
+    if (self.itemCount == 1) {
+        self.pageControl.hidden = YES;
+        self.autoScroll = NO;
+        self.shouldLoop = NO;
+    }
+    
+    // 设置pageControl总页数
+    self.pageControl.numberOfPages = self.itemCount;
+    
+    // 刷新数据
+    [self.collectionView reloadData];
     
     // 开启定时器
     [self startTimer];
@@ -138,11 +143,11 @@ static NSString *banner_footer = @"banner_footer";
 
 - (void)startTimer
 {
-    if (self.disableAutoScroll) return;
+    if (!self.autoScroll) return;
     
     [self stopTimer];
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.autoScrollInterval target:self selector:@selector(autoScrollToNextItem) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.scrollInterval target:self selector:@selector(autoScrollToNextItem) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 
@@ -151,7 +156,7 @@ static NSString *banner_footer = @"banner_footer";
 {
     if (self.itemCount == 0 ||
         self.itemCount == 1 ||
-        self.disableAutoScroll)
+        !self.autoScroll)
     {
         return;
     }
@@ -226,7 +231,11 @@ static NSString *banner_footer = @"banner_footer";
         }
     }
     
-    if (!self.showFooter) footer.hidden = YES;
+    if (self.showFooter) {
+        self.footer.hidden = NO;
+    } else {
+        self.footer.hidden = YES;
+    }
     
     return footer;
 }
@@ -312,6 +321,9 @@ static NSString *banner_footer = @"banner_footer";
     
     // 刷新数据
     [self reloadData];
+    
+    // 配置默认起始位置
+    [self fixDefaultPosition];
 }
 
 - (NSInteger)itemCount
@@ -330,6 +342,9 @@ static NSString *banner_footer = @"banner_footer";
     _shouldLoop = shouldLoop;
     
     [self reloadData];
+    
+    // 重置默认起始位置
+    [self fixDefaultPosition];
 }
 
 - (BOOL)shouldLoop
@@ -352,35 +367,35 @@ static NSString *banner_footer = @"banner_footer";
 }
 
 /**
- *  是否禁用自动滑动
+ *  是否自动滑动
  */
-- (void)setDisableAutoScroll:(BOOL)disableAutoScroll
+- (void)setAutoScroll:(BOOL)autoScroll
 {
-    _disableAutoScroll = disableAutoScroll;
+    _autoScroll = autoScroll;
     
-    if (disableAutoScroll) {
-        [self stopTimer];
-    } else {
+    if (autoScroll) {
         [self startTimer];
+    } else {
+        [self stopTimer];
     }
 }
 
 /**
  *  自动滑动间隔时间
  */
-- (void)setAutoScrollInterval:(CGFloat)autoScrollInterval
+- (void)setScrollInterval:(CGFloat)scrollInterval
 {
-    _autoScrollInterval = autoScrollInterval;
+    _scrollInterval = scrollInterval;
     
     [self startTimer];
 }
 
-- (CGFloat)autoScrollInterval
+- (CGFloat)scrollInterval
 {
-    if (!_autoScrollInterval) {
-        return 3.0;
+    if (!_scrollInterval) {
+        _scrollInterval = 3.0; // default
     }
-    return _autoScrollInterval;
+    return _scrollInterval;
 }
 
 #pragma mark 控件

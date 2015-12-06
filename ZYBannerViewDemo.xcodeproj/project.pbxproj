@@ -11,6 +11,8 @@
 		5AA8FB501C0BDAEE0074F33C /* ZYBannerFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AA8FB491C0BDAEE0074F33C /* ZYBannerFooter.m */; };
 		5AA8FB521C0BDAEE0074F33C /* ZYBannerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5AA8FB4B1C0BDAEE0074F33C /* ZYBannerView.bundle */; };
 		5AA8FB531C0BDAEE0074F33C /* ZYBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AA8FB4D1C0BDAEE0074F33C /* ZYBannerView.m */; };
+		5AD698691C1419AB00436603 /* NextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD698671C1419AB00436603 /* NextViewController.m */; };
+		5AD6986A1C1419AB00436603 /* NextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AD698681C1419AB00436603 /* NextViewController.xib */; };
 		5AD99F7C1C05C33800775D64 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD99F7B1C05C33800775D64 /* main.m */; };
 		5AD99F7F1C05C33800775D64 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD99F7E1C05C33800775D64 /* AppDelegate.m */; };
 		5AD99F821C05C33800775D64 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD99F811C05C33800775D64 /* ViewController.m */; };
@@ -38,6 +40,9 @@
 		5AA8FB4B1C0BDAEE0074F33C /* ZYBannerView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZYBannerView.bundle; sourceTree = "<group>"; };
 		5AA8FB4C1C0BDAEE0074F33C /* ZYBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYBannerView.h; sourceTree = "<group>"; };
 		5AA8FB4D1C0BDAEE0074F33C /* ZYBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYBannerView.m; sourceTree = "<group>"; };
+		5AD698661C1419AB00436603 /* NextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextViewController.h; sourceTree = "<group>"; };
+		5AD698671C1419AB00436603 /* NextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextViewController.m; sourceTree = "<group>"; };
+		5AD698681C1419AB00436603 /* NextViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NextViewController.xib; sourceTree = "<group>"; };
 		5AD99F761C05C33800775D64 /* ZYBannerViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZYBannerViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD99F7A1C05C33800775D64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AD99F7B1C05C33800775D64 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -115,6 +120,9 @@
 				5AD99F861C05C33800775D64 /* Images.xcassets */,
 				5AD99F881C05C33800775D64 /* LaunchScreen.xib */,
 				5AD99F791C05C33800775D64 /* Supporting Files */,
+				5AD698661C1419AB00436603 /* NextViewController.h */,
+				5AD698671C1419AB00436603 /* NextViewController.m */,
+				5AD698681C1419AB00436603 /* NextViewController.xib */,
 			);
 			path = ZYBannerViewDemo;
 			sourceTree = "<group>";
@@ -229,6 +237,7 @@
 				5AD99F8A1C05C33800775D64 /* LaunchScreen.xib in Resources */,
 				5AA8FB521C0BDAEE0074F33C /* ZYBannerView.bundle in Resources */,
 				5AD99F871C05C33800775D64 /* Images.xcassets in Resources */,
+				5AD6986A1C1419AB00436603 /* NextViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +259,7 @@
 				5AA8FB531C0BDAEE0074F33C /* ZYBannerView.m in Sources */,
 				5AD99F7F1C05C33800775D64 /* AppDelegate.m in Sources */,
 				5AA8FB501C0BDAEE0074F33C /* ZYBannerFooter.m in Sources */,
+				5AD698691C1419AB00436603 /* NextViewController.m in Sources */,
 				5AA8FB4E1C0BDAEE0074F33C /* ZYBannerCell.m in Sources */,
 				5AD99F7C1C05C33800775D64 /* main.m in Sources */,
 			);

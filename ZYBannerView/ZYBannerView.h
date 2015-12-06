@@ -19,14 +19,14 @@
 /** 是否显示footer, 默认为 NO (此属性为YES时, shouldLoop会被置为NO) */
 @property (nonatomic, assign) IBInspectable BOOL showFooter;
 
-/** 是否禁用自动滑动, 默认为 NO */
-@property (nonatomic, assign) IBInspectable BOOL disableAutoScroll;
+/** 是否自动滑动, 默认为 NO */
+@property (nonatomic, assign) IBInspectable BOOL autoScroll;
 
 /** 自动滑动间隔时间(s), 默认为 3.0 */
-@property (nonatomic, assign) IBInspectable CGFloat autoScrollInterval;
+@property (nonatomic, assign) IBInspectable CGFloat scrollInterval;
 
-/** pageControl */
-@property (nonatomic, strong) UIPageControl *pageControl;
+/** pageControl, 可自由配置其属性 */
+@property (nonatomic, strong, readonly) UIPageControl *pageControl;
 
 @property (nonatomic, weak) IBOutlet id<ZYBannerViewDataSource> dataSource;
 @property (nonatomic, weak) IBOutlet id<ZYBannerViewDelegate> delegate;
