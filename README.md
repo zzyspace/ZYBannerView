@@ -1,6 +1,6 @@
 # ZYBannerView
-### 简单易用, 可定制性强的轮播控件
----
+#### 简单易用, 可定制性强的轮播控件
+
 
 ## Features
 
@@ -12,7 +12,7 @@
 
 ## Usage
 
-### Basic Usage (基本使用)
+### Basic Usage
 
 > 只需简单地实现2个数据源方法即可
 
@@ -38,6 +38,70 @@ self.banner.dataSource = self;
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"xxx"]];
     return imageView;
 }
+```
+
+### Advanced Usage
+
+#### Property
+
+是否需要循环滚动, 默认为`NO`
+```Objective-C
+@property (nonatomic, assign) IBInspectable BOOL shouldLoop;
+```
+
+是否显示footer, 默认为`NO` (此属性为`YES`时, `shouldLoop`属性会被置为`NO`)
+```Objective-C
+@property (nonatomic, assign) IBInspectable BOOL showFooter;
+```
+
+是否自动滑动, 默认为`NO`
+```Objective-C
+@property (nonatomic, assign) IBInspectable BOOL autoScroll;
+```
+
+自动滑动间隔时间(s), 默认为 3.0
+```Objective-C
+@property (nonatomic, assign) IBInspectable NSTimeInterval scrollInterval;
+```
+
+pageControl, 可自由配置其属性, 例如`frame`, `pageIndicatorTintColor`, `currentPageIndicatorTintColor`
+```Objective-C
+@property (nonatomic, strong, readonly) UIPageControl *pageControl;
+```
+
+#### Method
+
+```Objective-C
+- (void)reloadData;
+```
+
+```Objective-C
+- (void)startTimer;
+- (void)stopTimer;
+```
+
+#### DataSource
+
+```Objective-C
+- (NSInteger)numberOfItemsInBanner:(ZYBannerView *)banner;
+```
+
+```Objective-C
+- (UIView *)banner:(ZYBannerView *)banner viewForItemAtIndex:(NSInteger)index;
+```
+
+```Objective-C
+- (NSString *)banner:(ZYBannerView *)banner titleForFooterWithState:(ZYBannerFooterState)footerState;
+```
+
+#### Delegate
+
+```Objective-C
+- (void)banner:(ZYBannerView *)banner didSelectItemAtIndex:(NSInteger)index;
+```
+
+```Objective-C
+- (void)bannerFooterDidTrigger:(ZYBannerView *)banner;
 ```
 
 ## Requirements
