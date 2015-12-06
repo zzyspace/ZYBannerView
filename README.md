@@ -16,14 +16,14 @@
 
 > 只需简单的2步即可快速集成此控件
 
-#### 初始化并设置数据源
+#### 1.初始化Banner并设置数据源
 
 ```Objective-C
 self.banner = [[ZYBannerView alloc] init];
 self.banner.dataSource = self;
 ```
 
-#### 实现数据源
+#### 2.实现数据源方法
 
 ```Objective-C
 // 返回Banner需要显示Item(View)的个数
@@ -77,7 +77,7 @@ Banner上显示的PageControl, 可自由配置其属性, 例如`frame`, `pageInd
 @property (nonatomic, weak) IBOutlet id<ZYBannerViewDelegate> delegate;
 ```
 
-- `shouldLoop`, `showFooter`, `autoScroll`, `scrollInterval`, `dataSource`, `delegate` 均可支持在Storyboard\xib中直接设置
+> NOTE : `shouldLoop`, `showFooter`, `autoScroll`, `scrollInterval`, `dataSource`, `delegate` 均可支持在Storyboard\xib中直接设置
 
 #### Method
 
