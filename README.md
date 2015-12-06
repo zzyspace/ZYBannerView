@@ -14,9 +14,9 @@
 
 ### Basic Usage
 
-> 只需简单地实现2个数据源方法即可快速集成此控件
+> 只需简单的2步即可快速集成此控件
 
-#### 设置数据源与代理
+#### 初始化并设置数据源
 
 ```Objective-C
 self.banner = [[ZYBannerView alloc] init];
