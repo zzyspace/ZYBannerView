@@ -19,6 +19,7 @@
 @interface ViewController () <ZYBannerViewDataSource, ZYBannerViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) ZYBannerView *banner;
+@property (nonatomic, strong) NSArray *dataArray;
 
 @property (weak, nonatomic) IBOutlet UISwitch *shouldLoopSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *showFooterSwitch;
@@ -32,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 控制器的automaticallyAdjustsScrollViewInsets属性为YES(default)时, 若控制器的view及其子控件有唯一的一个UIScrollView(包括其子类), 那么这个UIScrollView(包括其子类)会被调整内边距
+    // 控制器的automaticallyAdjustsScrollViewInsets属性为YES(default)时, 若控制器的view及其子控件有唯一的一个UIScrollView(或其子类), 那么这个UIScrollView(或其子类)会被调整内边距
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     // 配置banner
@@ -56,22 +57,26 @@
 
 #pragma mark - ZYBannerViewDataSource
 
-// 总共的item数
+// 返回Banner需要显示Item(View)的个数
 - (NSInteger)numberOfItemsInBanner:(ZYBannerView *)banner
 {
     return 3;
 }
 
-// 第`index`个item要显示什么(可以是完全自定义的view, 且无需设置frame)
+// 返回Banner在不同的index所要显示的View (可以是完全自定义的view, 且无需设置frame)
 - (UIView *)banner:(ZYBannerView *)banner viewForItemAtIndex:(NSInteger)index
 {
+    // 取出数据
+    NSString *imageName = self.dataArray[index];
+    
+    // 创建将要显示控件
     UIImageView *imageView = [[UIImageView alloc] init];
-    imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"ad_%ld", index+1]];
+    imageView.image = [UIImage imageNamed:imageName];
     
     return imageView;
 }
 
-// footer在不同状态时要显示的文字
+// 返回Footer在不同状态时要显示的文字
 - (NSString *)banner:(ZYBannerView *)banner titleForFooterWithState:(ZYBannerFooterState)footerState
 {
     if (footerState == ZYBannerFooterStateIdle) {
@@ -134,6 +139,16 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.scrollIntervalField resignFirstResponder];
+}
+
+#pragma mark Getter
+
+- (NSArray *)dataArray
+{
+    if (!_dataArray) {
+        _dataArray = @[@"ad_0.jpg", @"ad_1.jpg", @"ad_2.jpg"];
+    }
+    return _dataArray;
 }
 
 @end
