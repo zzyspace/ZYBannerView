@@ -16,11 +16,12 @@
 
 > 只需简单的2步即可快速集成此控件
 
-#### 1.初始化Banner并设置数据源
+#### 1.创建Banner并设置数据源
 
 ```Objective-C
 self.banner = [[ZYBannerView alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
 self.banner.dataSource = self;
+[self.view addSubview:self.banner];
 ```
 
 #### 2.实现数据源方法
@@ -94,29 +95,29 @@ Banner上显示的PageControl, 可自由配置其属性, 例如`frame`, `pageInd
 
 #### DataSource
 
-返回Banner需要显示Item(View)的个数
+返回Banner需要显示Item(View)的个数 【required】
 ```Objective-C
 - (NSInteger)numberOfItemsInBanner:(ZYBannerView *)banner;
 ```
 
-返回Banner在不同的`index`所要显示的View. 这个View可以是简单的一个UIImageView, 也可以是自定义的一个复杂的View. View的大小自动布局为Banner的大小, 无需对此View设置`frame`
+返回Banner在不同的`index`所要显示的View. 这个View可以是简单的一个UIImageView, 也可以是自定义的一个复杂的View. View的大小自动布局为Banner的大小, 无需对此View设置`frame` 【required】
 ```Objective-C
 - (UIView *)banner:(ZYBannerView *)banner viewForItemAtIndex:(NSInteger)index;
 ```
 
-返回Footer在不同状态下(`ZYBannerFooterStateIdle`正常状态 \ `ZYBannerFooterStateTrigger`触发状态)显示的文字
+返回Footer在不同状态下(`ZYBannerFooterStateIdle`正常状态 \ `ZYBannerFooterStateTrigger`触发状态)显示的文字【optional】
 ```Objective-C
 - (NSString *)banner:(ZYBannerView *)banner titleForFooterWithState:(ZYBannerFooterState)footerState;
 ```
 
 #### Delegate
 
-当用户点击了第`index`个Item时, 此代理方法将被调用
+当用户点击了第`index`个Item时, 此代理方法将被调用 【optional】
 ```Objective-C
 - (void)banner:(ZYBannerView *)banner didSelectItemAtIndex:(NSInteger)index;
 ```
 
-当用户拖动Footer并达到触发点时, 此代理方法将被调用 
+当用户拖动Footer并达到触发点时, 此代理方法将被调用【optional】
 ```Objective-C
 - (void)bannerFooterDidTrigger:(ZYBannerView *)banner;
 ```
