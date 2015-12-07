@@ -19,7 +19,7 @@
 #### 1.初始化Banner并设置数据源
 
 ```Objective-C
-self.banner = [[ZYBannerView alloc] init];
+self.banner = [[ZYBannerView alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
 self.banner.dataSource = self;
 ```
 
