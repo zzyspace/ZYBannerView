@@ -1,6 +1,8 @@
 # ZYBannerView
-#### 简单易用, 有着较好可定制性的轮播控件
+简单易用的轮播控件, 基于UICollectionView实现.
 
+![](./ZYBannerViewDemo/Resource/1.gif)
+![](./ZYBannerViewDemo/Resource/2.gif)
 
 ## Features
 
