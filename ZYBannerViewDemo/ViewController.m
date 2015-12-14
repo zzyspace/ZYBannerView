@@ -13,8 +13,8 @@
 #define kScreenWidth  [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
-#define kNavigationBarHeight  64
-#define kBannerHeight 144
+#define kNavigationBarHeight  64.0
+#define kBannerHeight 192.0
 
 @interface ViewController () <ZYBannerViewDataSource, ZYBannerViewDelegate, UITextFieldDelegate>
 
@@ -72,6 +72,7 @@
     // 创建将要显示控件
     UIImageView *imageView = [[UIImageView alloc] init];
     imageView.image = [UIImage imageNamed:imageName];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
     
     return imageView;
 }
