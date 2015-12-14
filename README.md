@@ -1,8 +1,7 @@
 # ZYBannerView
 简单易用的轮播控件, 基于UICollectionView实现.
 
-![](./ZYBannerViewDemo/Resource/1.gif)
-![](./ZYBannerViewDemo/Resource/2.gif)
+![](./ZYBannerViewDemo/Resource/demo.gif)
 
 ## Features
 
