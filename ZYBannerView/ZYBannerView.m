@@ -120,7 +120,6 @@ static NSString *banner_footer = @"banner_footer";
     if (self.itemCount == 1) {
         self.pageControl.hidden = YES;
         self.autoScroll = NO;
-        self.shouldLoop = NO;
     }
     
     // 设置pageControl总页数
@@ -351,6 +350,10 @@ static NSString *banner_footer = @"banner_footer";
 {
     if (self.showFooter) {
         // 如果footer存在就不应该有循环滚动
+        return NO;
+    }
+    if (self.itemCount == 1) {
+        // 只有一个item也不应该有循环滚动
         return NO;
     }
     return _shouldLoop;

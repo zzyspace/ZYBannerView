@@ -60,7 +60,7 @@
 // 返回Banner需要显示Item(View)的个数
 - (NSInteger)numberOfItemsInBanner:(ZYBannerView *)banner
 {
-    return 3;
+    return self.dataArray.count;
 }
 
 // 返回Banner在不同的index所要显示的View (可以是完全自定义的view, 且无需设置frame)
