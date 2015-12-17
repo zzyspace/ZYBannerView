@@ -88,6 +88,10 @@ static NSString *banner_footer = @"banner_footer";
 // 配置默认起始位置
 - (void)fixDefaultPosition
 {
+    if (self.itemCount == 0) {
+        return;
+    }
+    
     if (self.shouldLoop) {
         // 总item数的中间
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -109,17 +113,8 @@ static NSString *banner_footer = @"banner_footer";
 
 - (void)reloadData
 {
-    if (!self.dataSource) {
+    if (!self.dataSource || self.itemCount == 0) {
         return;
-    }
-    if (self.itemCount == 0) {
-        self.pageControl.hidden = YES;
-        self.autoScroll = NO;
-        return;
-    }
-    if (self.itemCount == 1) {
-        self.pageControl.hidden = YES;
-        self.autoScroll = NO;
     }
     
     // 设置pageControl总页数
@@ -381,6 +376,15 @@ static NSString *banner_footer = @"banner_footer";
     } else {
         [self stopTimer];
     }
+}
+
+- (BOOL)autoScroll
+{
+    if (self.itemCount < 2) {
+        // itemCount小于2时, 禁用自动滚动
+        return NO;
+    }
+    return _autoScroll;
 }
 
 /**
