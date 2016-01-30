@@ -1,3 +1,7 @@
+[![CocoaPods](http://img.shields.io/cocoapods/v/ZYBannerView.svg?style=flat)](http://cocoapods.org/?q=ZYBannerView)&nbsp;
+[![CocoaPods](http://img.shields.io/cocoapods/p/ZYBannerView.svg?style=flat)](http://cocoapods.org/?q=ZYBannerView)&nbsp;
+[![Support](https://img.shields.io/badge/support-iOS%207%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)&nbsp;
+
 # ZYBannerView
 - 简单易用的轮播控件, 基于UICollectionView实现.
 
