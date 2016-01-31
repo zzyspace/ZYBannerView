@@ -135,12 +135,12 @@ self.banner.dataSource = self;
 
 ## Installation
 
-1. 使用CocoaPods:
+1.使用CocoaPods:
 ```Objective-C
 pod 'ZYBannerView'
 ```
 
-2. 手动:
+2.手动添加:
 - 将ZYBannerView文件夹中拖拽到项目中
 - 导入头文件：`#import "ZYBannerView.h"`
 
