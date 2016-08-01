@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'ZYBannerView'
-  s.version  = '0.1.3'
+  s.version  = '1.0.0'
   s.license  = 'MIT'
   s.summary  = 'A banner view used on iOS.'
   s.homepage = 'https://github.com/zzyspace/ZYBannerView'
