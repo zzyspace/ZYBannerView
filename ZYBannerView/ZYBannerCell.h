@@ -9,6 +9,6 @@
 
 @interface ZYBannerCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) UIView *itemView;
 
 @end

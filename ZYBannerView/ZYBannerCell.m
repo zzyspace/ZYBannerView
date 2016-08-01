@@ -8,5 +8,31 @@
 #import "ZYBannerCell.h"
 
 @implementation ZYBannerCell
+@synthesize itemView = _itemView;
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.itemView.frame = self.bounds;
+}
+
+- (UIView *)itemView
+{
+    if (!_itemView) {
+        _itemView = [[UIView alloc] init];
+    }
+    return _itemView;
+}
+
+- (void)setItemView:(UIView *)itemView
+{
+    if (_itemView) {
+        [_itemView removeFromSuperview];
+    }
+    
+    _itemView = itemView;
+    
+    [self addSubview:_itemView];
+}
 
 @end

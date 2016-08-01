@@ -201,9 +201,7 @@ static NSString *banner_footer = @"banner_footer";
     ZYBannerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:banner_item forIndexPath:indexPath];
  
     if ([self.dataSource respondsToSelector:@selector(banner:viewForItemAtIndex:)]) {
-        UIView *itemView = [self.dataSource banner:self viewForItemAtIndex:indexPath.item % self.itemCount];
-        itemView.frame = cell.bounds;
-        [cell addSubview:itemView];
+        cell.itemView = [self.dataSource banner:self viewForItemAtIndex:indexPath.item % self.itemCount];
     }
     
     return cell;
