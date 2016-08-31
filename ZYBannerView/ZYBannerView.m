@@ -75,14 +75,11 @@ static NSString *banner_footer = @"banner_footer";
     [self.collectionView reloadData];
     
     // pageControl
-    if (CGRectEqualToRect(self.pageControl.frame, CGRectZero)) {
-        // 若未对pageControl设置过frame, 则使用以下默认frame
-        CGFloat w = self.frame.size.width;
-        CGFloat h = ZY_PAGE_CONTROL_HEIGHT;
-        CGFloat x = 0;
-        CGFloat y = self.frame.size.height - h;
-        self.pageControl.frame = CGRectMake(x, y, w, h);
-    }
+    CGFloat w = self.frame.size.width;
+    CGFloat h = ZY_PAGE_CONTROL_HEIGHT;
+    CGFloat x = 0;
+    CGFloat y = self.frame.size.height - h;
+    self.pageControl.frame = CGRectMake(x, y, w, h);
 }
 
 // 配置默认起始位置
@@ -303,12 +300,6 @@ static NSString *banner_footer = @"banner_footer";
 
 #pragma mark - setters & getters
 #pragma mark 属性
-
-- (void)setFrame:(CGRect)frame
-{
-    self.pageControl.frame = CGRectZero;
-    [super setFrame:frame];
-}
 
 /**
  *  数据源
