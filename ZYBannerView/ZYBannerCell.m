@@ -10,6 +10,14 @@
 @implementation ZYBannerCell
 @synthesize itemView = _itemView;
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame]) {
+        self.clipsToBounds = YES;
+    }
+    return self;
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
