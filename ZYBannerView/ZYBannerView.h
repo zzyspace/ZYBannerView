@@ -26,6 +26,7 @@
 
 /** pageControl, 可自由配置其属性 */
 @property (nonatomic, strong, readonly) UIPageControl *pageControl;
+@property (nonatomic, assign, readwrite)  CGRect pageControlFrame;
 
 @property (nonatomic, weak) IBOutlet id<ZYBannerViewDataSource> dataSource;
 @property (nonatomic, weak) IBOutlet id<ZYBannerViewDelegate> delegate;
