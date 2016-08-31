@@ -15,6 +15,7 @@
 - [x] 显示\隐藏Footer
 - [x] 自定义PageControl属性
 - [x] 支持在Storyboard\xib中创建并配置其属性
+- [x] 支持Autolayout
 
 ## Usage
 
@@ -73,9 +74,14 @@ self.banner.dataSource = self;
 @property (nonatomic, assign) IBInspectable NSTimeInterval scrollInterval;
 ```
 
-- Banner上显示的PageControl, 可自由配置其属性, 例如`frame`, `pageIndicatorTintColor`, `currentPageIndicatorTintColor`
+- Banner上显示的PageControl, 可自由配置其属性, 例如`pageIndicatorTintColor`, `currentPageIndicatorTintColor`
 ```Objective-C
 @property (nonatomic, strong, readonly) UIPageControl *pageControl;
+```
+
+- 根据需要设置PageControl的frame, 若不设置或者设置为CGRectZero, 则使用默认位置
+```Objective-C
+@property (nonatomic, assign, readwrite)  CGRect pageControlFrame;
 ```
 
 - 数据源与代理
