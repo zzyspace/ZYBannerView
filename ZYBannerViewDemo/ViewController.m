@@ -33,7 +33,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 控制器的automaticallyAdjustsScrollViewInsets属性为YES(default)时, 若控制器的view及其子控件有唯一的一个UIScrollView(或其子类), 那么这个UIScrollView(或其子类)会被调整内边距
+    // 控制器的 automaticallyAdjustsScrollViewInsets 属性为 YES(default) 时,
+    // 若控制器的view及其子控件有唯一的一个 UIScrollView (或其子类), 那么这个
+    // UIScrollView (或其子类)会被调整内边距
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     // 配置banner
@@ -57,13 +59,13 @@
 
 #pragma mark - ZYBannerViewDataSource
 
-// 返回Banner需要显示Item(View)的个数
+// 返回 Banner 需要显示 Item(View) 的个数
 - (NSInteger)numberOfItemsInBanner:(ZYBannerView *)banner
 {
     return self.dataArray.count;
 }
 
-// 返回Banner在不同的index所要显示的View (可以是完全自定义的view, 且无需设置frame)
+// 返回 Banner 在不同的 index 所要显示的 View (可以是完全自定义的v iew, 且无需设置 frame)
 - (UIView *)banner:(ZYBannerView *)banner viewForItemAtIndex:(NSInteger)index
 {
     // 取出数据
@@ -77,7 +79,7 @@
     return imageView;
 }
 
-// 返回Footer在不同状态时要显示的文字
+// 返回 Footer 在不同状态时要显示的文字
 - (NSString *)banner:(ZYBannerView *)banner titleForFooterWithState:(ZYBannerFooterState)footerState
 {
     if (footerState == ZYBannerFooterStateIdle) {
@@ -96,7 +98,7 @@
     NSLog(@"点击了第%ld个项目", index);
 }
 
-// 在这里实现拖动footer后的事件处理
+// 在这里实现拖动 Footer 后的事件处理
 - (void)bannerFooterDidTrigger:(ZYBannerView *)banner
 {
     NSLog(@"触发了footer");

@@ -83,6 +83,7 @@ static NSString *banner_footer = @"banner_footer";
         CGFloat y = self.frame.size.height - h;
         self.pageControl.frame = CGRectMake(x, y, w, h);
     }
+    [self fixDefaultPosition];
 }
 
 // 配置默认起始位置
@@ -94,18 +95,14 @@ static NSString *banner_footer = @"banner_footer";
     
     if (self.shouldLoop) {
         // 总item数的中间
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:(ZY_TOTAL_ITEMS / 2) inSection:0]
-                                        atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
-            self.pageControl.currentPage = 0;
-        });
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:(ZY_TOTAL_ITEMS / 2) inSection:0]
+                                    atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
+        self.pageControl.currentPage = 0;
     } else {
         // 第0个item
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]
-                                        atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
-            self.pageControl.currentPage = 0;
-        });
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]
+                                    atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
+        self.pageControl.currentPage = 0;
     }
 }
 
