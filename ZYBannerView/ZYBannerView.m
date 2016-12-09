@@ -9,7 +9,7 @@
 #import "ZYBannerCell.h"
 
 // 总共的item数
-#define ZY_TOTAL_ITEMS (self.itemCount * 20000)
+#define ZY_TOTAL_ITEMS (self.itemCount * 10000)
 
 #define ZY_FOOTER_WIDTH 64.0
 #define ZY_PAGE_CONTROL_HEIGHT 32.0
