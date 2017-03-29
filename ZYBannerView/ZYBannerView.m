@@ -7,6 +7,9 @@
 
 #import "ZYBannerView.h"
 #import "ZYBannerCell.h"
+#import <UIKit/UIKit.h>
+
+#define iOS10 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0)
 
 @interface ZYWeakTimerTarget : NSObject
 
@@ -38,8 +41,19 @@
 }
 
 + (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)interval target:(id)target selector:(SEL)sel {
-    ZYWeakTimerTarget * weakTarget = [[self alloc]initWithTarget:target selector:sel];
-    NSTimer * timer = [NSTimer scheduledTimerWithTimeInterval:interval target:weakTarget selector:@selector(timerDidFire:) userInfo:nil repeats:YES];
+    NSTimer * timer;
+    
+    if (iOS10) {
+        __weak id weakTarget = target;
+        timer = [NSTimer scheduledTimerWithTimeInterval:interval repeats:YES block:^(NSTimer* t) {
+            id _Nullable strongTarget = weakTarget;
+            [strongTarget performSelector:sel];
+        }];
+    }else {
+        ZYWeakTimerTarget * weakTarget = [[self alloc]initWithTarget:target selector:sel];
+        timer = [NSTimer scheduledTimerWithTimeInterval:interval target:weakTarget selector:@selector(timerDidFire:) userInfo:nil repeats:YES];
+    }
+    
     return timer;
 }
 
