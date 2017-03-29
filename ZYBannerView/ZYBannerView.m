@@ -8,6 +8,43 @@
 #import "ZYBannerView.h"
 #import "ZYBannerCell.h"
 
+@interface ZYWeakTimerTarget : NSObject
+
+@property (nonatomic,weak) id target;
+@property (nonatomic,assign) SEL selector;
+
++ (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)interval target:(id)target selector:(nonnull SEL)sel;
+@end
+
+@implementation ZYWeakTimerTarget
+- (instancetype)initWithTarget:(id)target selector:(SEL)sel {
+    self = [super init];
+    if (self) {
+        self.target = target;
+        self.selector = sel;
+    }
+    return self;
+}
+
+- (void)timerDidFire:(NSTimer *)timer {
+    if(self.target)
+    {
+        [self.target performSelector:self.selector withObject:timer];
+    }
+    else
+    {
+        [timer invalidate];
+    }
+}
+
++ (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)interval target:(id)target selector:(SEL)sel {
+    ZYWeakTimerTarget * weakTarget = [[self alloc]initWithTarget:target selector:sel];
+    NSTimer * timer = [NSTimer scheduledTimerWithTimeInterval:interval target:weakTarget selector:@selector(timerDidFire:) userInfo:nil repeats:YES];
+    return timer;
+}
+
+@end
+
 // 总共的item数
 #define ZY_TOTAL_ITEMS (self.itemCount * 10000)
 
@@ -23,7 +60,7 @@
 @property (nonatomic, strong, readwrite) UIPageControl *pageControl;
 
 @property (nonatomic, assign) NSInteger itemCount;
-@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, weak) NSTimer *timer;
 
 @end
 
@@ -129,7 +166,6 @@ static NSString *banner_footer = @"banner_footer";
 - (void)stopTimer
 {
     [self.timer invalidate];
-    self.timer = nil;
 }
 
 - (void)startTimer
@@ -138,8 +174,9 @@ static NSString *banner_footer = @"banner_footer";
     
     [self stopTimer];
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.scrollInterval target:self selector:@selector(autoScrollToNextItem) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+    NSTimer * timer = [ZYWeakTimerTarget scheduledTimerWithTimeInterval:self.scrollInterval target:self selector:@selector(autoScrollToNextItem)];
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    self.timer = timer;
 }
 
 // 定时器方法
