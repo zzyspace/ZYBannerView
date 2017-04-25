@@ -400,6 +400,17 @@ static NSString *banner_footer = @"banner_footer";
     return _scrollInterval;
 }
 
+
+/**
+ *  重写设置背景颜色
+ */
+- (void)setBackgroundColor:(UIColor *)backgroundColor
+{
+    [super setBackgroundColor:backgroundColor];
+    
+    self.collectionView.backgroundColor = backgroundColor;
+}
+
 #pragma mark 控件
 
 /**
