@@ -153,3 +153,7 @@ pod 'ZYBannerView'
 ## License
 
 ZYBannerView is released under the MIT license. See LICENSE for details.
+
+## ZYBannerView in C#
+
+Looking to incorporate ZYBannerView into your project in Xamarin? Check out [ZYBannerView_Xamarin](https://github.com/jingliancui/ZYBannerView_Xamarin) (thanks to [jingliancui](https://github.com/jingliancui)).
