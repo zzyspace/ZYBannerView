@@ -95,7 +95,12 @@
 // 在这里实现点击事件的处理
 - (void)banner:(ZYBannerView *)banner didSelectItemAtIndex:(NSInteger)index
 {
-    NSLog(@"点击了第%ld个项目", index);
+    NSLog(@"点击了第%ld个项目", (long)index);
+}
+
+- (void)banner:(ZYBannerView *)banner didScrollToItemAtIndex:(NSInteger)index
+{
+    NSLog(@"滚动到第%ld个项目", (long)index);
 }
 
 // 在这里实现拖动 Footer 后的事件处理
@@ -106,7 +111,6 @@
     NextViewController *vc = [[NextViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
-
 
 #pragma mark -
 #pragma mark Demo banner property setting (无需关心此部分逻辑)

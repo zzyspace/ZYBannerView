@@ -97,12 +97,21 @@ static NSString *banner_footer = @"banner_footer";
         // 总item数的中间
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:(ZY_TOTAL_ITEMS / 2) inSection:0]
                                     atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
-        self.pageControl.currentPage = 0;
+        [self didScrollItemAtIndex:0];
     } else {
         // 第0个item
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]
                                     atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
-        self.pageControl.currentPage = 0;
+        [self didScrollItemAtIndex:0];
+    }
+}
+
+- (void)didScrollItemAtIndex:(NSInteger)index
+{
+    self.pageControl.currentPage = index;
+    
+    if ([self.delegate respondsToSelector:@selector(banner:didScrollToItemAtIndex:)]) {
+        [self.delegate banner:self didScrollToItemAtIndex:index];
     }
 }
 
@@ -241,7 +250,7 @@ static NSString *banner_footer = @"banner_footer";
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSIndexPath *currentIndexPath = [[collectionView indexPathsForVisibleItems] firstObject];
-    self.pageControl.currentPage = currentIndexPath.item % self.itemCount;
+    [self didScrollItemAtIndex:currentIndexPath.item % self.itemCount];
 }
 
 
@@ -409,6 +418,14 @@ static NSString *banner_footer = @"banner_footer";
     [super setBackgroundColor:backgroundColor];
     
     self.collectionView.backgroundColor = backgroundColor;
+}
+
+/**
+ *  当前 item 的 index
+ */
+- (NSInteger)currentIndex
+{
+    return self.pageControl.currentPage;
 }
 
 #pragma mark 控件
