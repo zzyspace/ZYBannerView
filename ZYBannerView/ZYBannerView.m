@@ -250,7 +250,9 @@ static NSString *banner_footer = @"banner_footer";
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSIndexPath *currentIndexPath = [[collectionView indexPathsForVisibleItems] firstObject];
-    [self didScrollItemAtIndex:currentIndexPath.item % self.itemCount];
+    if (currentIndexPath) {
+        [self didScrollItemAtIndex:currentIndexPath.item % self.itemCount];
+    }
 }
 
 
@@ -423,10 +425,37 @@ static NSString *banner_footer = @"banner_footer";
 /**
  *  当前 item 的 index
  */
+- (void)setCurrentIndex:(NSInteger)currentIndex animated:(BOOL)animated
+{
+    if (self.shouldLoop) {
+        NSIndexPath *oldCurrentIndexPath = [[self.collectionView indexPathsForVisibleItems] firstObject];
+        NSUInteger oldCurrentIndex = oldCurrentIndexPath.item;
+        NSUInteger newCurrentIndex = oldCurrentIndex - oldCurrentIndex % self.itemCount + currentIndex;
+        if(newCurrentIndex >= ZY_TOTAL_ITEMS) {
+            return;
+        }
+        
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:newCurrentIndex inSection:0]
+                                    atScrollPosition:UICollectionViewScrollPositionLeft
+                                            animated:animated];
+        [self didScrollItemAtIndex:newCurrentIndex % self.itemCount];
+    } else {
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:currentIndex inSection:0]
+                                    atScrollPosition:UICollectionViewScrollPositionLeft
+                                            animated:animated];
+        [self didScrollItemAtIndex:currentIndex];
+    }
+}
+- (void)setCurrentIndex:(NSInteger)currentIndex
+{
+    [self setCurrentIndex:currentIndex animated:NO];
+}
+
 - (NSInteger)currentIndex
 {
     return self.pageControl.currentPage;
 }
+
 
 #pragma mark 控件
 
