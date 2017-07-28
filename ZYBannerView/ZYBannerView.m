@@ -119,7 +119,7 @@ static NSString *banner_footer = @"banner_footer";
 
 - (void)reloadData
 {
-    if (!self.dataSource || self.itemCount == 0) {
+    if (!self.dataSource) {
         return;
     }
     
@@ -207,7 +207,8 @@ static NSString *banner_footer = @"banner_footer";
     ZYBannerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:banner_item forIndexPath:indexPath];
  
     if ([self.dataSource respondsToSelector:@selector(banner:viewForItemAtIndex:)]) {
-        cell.itemView = [self.dataSource banner:self viewForItemAtIndex:indexPath.item % self.itemCount];
+        NSInteger convertIndex = self.itemCount > 0 ? indexPath.item % self.itemCount : 0;
+        cell.itemView = [self.dataSource banner:self viewForItemAtIndex:convertIndex];
     }
     
     return cell;
@@ -243,7 +244,8 @@ static NSString *banner_footer = @"banner_footer";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self.delegate respondsToSelector:@selector(banner:didSelectItemAtIndex:)]) {
-        [self.delegate banner:self didSelectItemAtIndex:(indexPath.item % self.itemCount)];
+        NSInteger convertIndex = self.itemCount > 0 ? indexPath.item % self.itemCount : 0;
+        [self.delegate banner:self didSelectItemAtIndex:convertIndex];
     }
 }
 
@@ -251,7 +253,8 @@ static NSString *banner_footer = @"banner_footer";
 {
     NSIndexPath *currentIndexPath = [[collectionView indexPathsForVisibleItems] firstObject];
     if (currentIndexPath) {
-        [self didScrollItemAtIndex:currentIndexPath.item % self.itemCount];
+        NSInteger convertIndex = self.itemCount > 0 ? currentIndexPath.item % self.itemCount : 0;
+        [self didScrollItemAtIndex:convertIndex];
     }
 }
 
@@ -353,7 +356,7 @@ static NSString *banner_footer = @"banner_footer";
         // 如果footer存在就不应该有循环滚动
         return NO;
     }
-    if (self.itemCount == 1) {
+    if (self.itemCount <= 1) {
         // 只有一个item也不应该有循环滚动
         return NO;
     }
@@ -427,6 +430,9 @@ static NSString *banner_footer = @"banner_footer";
  */
 - (void)setCurrentIndex:(NSInteger)currentIndex animated:(BOOL)animated
 {
+    if (self.itemCount == 0) {
+        return;
+    }
     if (self.shouldLoop) {
         NSIndexPath *oldCurrentIndexPath = [[self.collectionView indexPathsForVisibleItems] firstObject];
         NSUInteger oldCurrentIndex = oldCurrentIndexPath.item;
