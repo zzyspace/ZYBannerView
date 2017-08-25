@@ -346,6 +346,7 @@ static NSString *banner_footer = @"banner_footer";
     _pageControl = nil;
     _flowLayout.scrollDirection = (UICollectionViewScrollDirection)direction;
     _collectionView.contentInset = UIEdgeInsetsZero;
+    _collectionView.scrollEnabled = NO;
 }
 
 /**
