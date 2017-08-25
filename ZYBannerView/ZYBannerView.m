@@ -14,7 +14,7 @@
 #define ZY_FOOTER_WIDTH 64.0
 #define ZY_PAGE_CONTROL_HEIGHT 32.0
 
-@interface ZYBannerView () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface ZYBannerView () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
@@ -119,7 +119,7 @@ static NSString *banner_footer = @"banner_footer";
 
 - (void)reloadData
 {
-    if (!self.dataSource) {
+    if (!self.dataSource || self.itemCount == 0) {
         return;
     }
     
@@ -168,23 +168,25 @@ static NSString *banner_footer = @"banner_footer";
     if(nextItem >= ZY_TOTAL_ITEMS) {
         return;
     }
-    
+
+    UICollectionViewScrollPosition position = _direction == ZYBannerDirectionHorizontal ? UICollectionViewScrollPositionLeft :UICollectionViewScrollPositionBottom;
+
     if (self.shouldLoop)
     {
         // 无限往下翻页
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:nextItem inSection:0]
-                                    atScrollPosition:UICollectionViewScrollPositionLeft
+                                    atScrollPosition:position
                                             animated:YES];
     } else {
         if ((currentItem % self.itemCount) == self.itemCount - 1) {
             // 当前最后一张, 回到第0张
             [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]
-                                        atScrollPosition:UICollectionViewScrollPositionLeft
+                                        atScrollPosition:position
                                                 animated:YES];
         } else {
             // 往下翻页
             [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:nextItem inSection:0]
-                                        atScrollPosition:UICollectionViewScrollPositionLeft
+                                        atScrollPosition:position
                                                 animated:YES];
         }
     }
@@ -207,8 +209,7 @@ static NSString *banner_footer = @"banner_footer";
     ZYBannerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:banner_item forIndexPath:indexPath];
  
     if ([self.dataSource respondsToSelector:@selector(banner:viewForItemAtIndex:)]) {
-        NSInteger convertIndex = self.itemCount > 0 ? indexPath.item % self.itemCount : 0;
-        cell.itemView = [self.dataSource banner:self viewForItemAtIndex:convertIndex];
+        cell.itemView = [self.dataSource banner:self viewForItemAtIndex:indexPath.item % self.itemCount];
     }
     
     return cell;
@@ -244,8 +245,7 @@ static NSString *banner_footer = @"banner_footer";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self.delegate respondsToSelector:@selector(banner:didSelectItemAtIndex:)]) {
-        NSInteger convertIndex = self.itemCount > 0 ? indexPath.item % self.itemCount : 0;
-        [self.delegate banner:self didSelectItemAtIndex:convertIndex];
+        [self.delegate banner:self didSelectItemAtIndex:(indexPath.item % self.itemCount)];
     }
 }
 
@@ -253,8 +253,7 @@ static NSString *banner_footer = @"banner_footer";
 {
     NSIndexPath *currentIndexPath = [[collectionView indexPathsForVisibleItems] firstObject];
     if (currentIndexPath) {
-        NSInteger convertIndex = self.itemCount > 0 ? currentIndexPath.item % self.itemCount : 0;
-        [self didScrollItemAtIndex:convertIndex];
+        [self didScrollItemAtIndex:currentIndexPath.item % self.itemCount];
     }
 }
 
@@ -338,6 +337,18 @@ static NSString *banner_footer = @"banner_footer";
 }
 
 /**
+ *  设置滚动方向
+ */
+- (void)setDirection:(ZYBannerDirection)direction
+{
+    _direction = direction;
+
+    _pageControl = nil;
+    _flowLayout.scrollDirection = (UICollectionViewScrollDirection)direction;
+    _collectionView.contentInset = UIEdgeInsetsZero;
+}
+
+/**
  *  是否需要循环滚动
  */
 - (void)setShouldLoop:(BOOL)shouldLoop
@@ -356,7 +367,7 @@ static NSString *banner_footer = @"banner_footer";
         // 如果footer存在就不应该有循环滚动
         return NO;
     }
-    if (self.itemCount <= 1) {
+    if (self.itemCount == 1) {
         // 只有一个item也不应该有循环滚动
         return NO;
     }
@@ -430,9 +441,6 @@ static NSString *banner_footer = @"banner_footer";
  */
 - (void)setCurrentIndex:(NSInteger)currentIndex animated:(BOOL)animated
 {
-    if (self.itemCount == 0) {
-        return;
-    }
     if (self.shouldLoop) {
         NSIndexPath *oldCurrentIndexPath = [[self.collectionView indexPathsForVisibleItems] firstObject];
         NSUInteger oldCurrentIndex = oldCurrentIndexPath.item;
@@ -475,6 +483,7 @@ static NSString *banner_footer = @"banner_footer";
         _collectionView.pagingEnabled = YES;
         _collectionView.alwaysBounceHorizontal = YES; // 小于等于一页时, 允许bounce
         _collectionView.showsHorizontalScrollIndicator = NO;
+        _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.scrollsToTop = NO;
         _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         _collectionView.delegate = self;
