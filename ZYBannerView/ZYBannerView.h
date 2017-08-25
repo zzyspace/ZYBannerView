@@ -8,9 +8,17 @@
 #import <UIKit/UIKit.h>
 #import "ZYBannerFooter.h"
 
+typedef NS_ENUM(NSUInteger, ZYBannerDirection) {
+    ZYBannerDirectionVertical,
+    ZYBannerDirectionHorizontal
+};
+
 @protocol ZYBannerViewDataSource, ZYBannerViewDelegate;
 
 @interface ZYBannerView : UIView
+
+/** 滚动方向，默认为ZYBannerDirectionVertical */
+@property (nonatomic, assign) IBInspectable ZYBannerDirection direction;
 
 /** 是否需要循环滚动, 默认为 NO */
 @property (nonatomic, assign) IBInspectable BOOL shouldLoop;
