@@ -20,6 +20,9 @@ typedef NS_ENUM(NSUInteger, ZYBannerDirection) {
 /** 滚动方向，默认为ZYBannerDirectionVertical */
 @property (nonatomic, assign) IBInspectable ZYBannerDirection direction;
 
+/** 是否能拖拽滚动, 主动设置触发 */
+@property (nonatomic, assign) IBInspectable BOOL scrollEnabled;
+
 /** 是否需要循环滚动, 默认为 NO */
 @property (nonatomic, assign) IBInspectable BOOL shouldLoop;
 
