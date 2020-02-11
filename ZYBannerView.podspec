@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
   s.name     = 'ZYBannerView'
-  s.version  = '1.1.4'
+  s.version  = '1.1.5'
   s.license  = 'MIT'
   s.summary  = 'A banner view used on iOS.'
   s.homepage = 'https://github.com/zzyspace/ZYBannerView'
   s.author   = { 'zy_zhang' => '551854173@qq.com' }
 
-  s.source   = { :git => 'https://github.com/zzyspace/ZYBannerView.git', :tag => 'v1.1.4' }
+  s.source   = { :git => 'https://github.com/zzyspace/ZYBannerView.git', :tag => 'v1.1.5' }
 
   s.description = %{
     Easy, customizable banner view, which implement by Objective-C
