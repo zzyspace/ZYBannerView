@@ -32,6 +32,7 @@
 @property (nonatomic, assign) NSInteger currentIndex;
 - (void)setCurrentIndex:(NSInteger)currentIndex animated:(BOOL)animated;
 
+@property (nonatomic, readonly) UICollectionView *collectionView;
 @property (nonatomic, weak) IBOutlet id<ZYBannerViewDataSource> dataSource;
 @property (nonatomic, weak) IBOutlet id<ZYBannerViewDelegate> delegate;
 
