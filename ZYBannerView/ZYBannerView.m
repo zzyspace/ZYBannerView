@@ -479,6 +479,9 @@ static NSString *banner_footer = @"banner_footer";
         _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
+        if (@available(iOS 11, *)) {
+            _collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
         
         // 注册cell
         [_collectionView registerClass:[ZYBannerCell class] forCellWithReuseIdentifier:banner_item];
